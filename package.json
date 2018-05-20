@@ -4,18 +4,14 @@
   "description": "Library to make hitting the Google Photos API easy",
   "main": "index.js",
   "scripts": {
-    "test": "mocha **/*_spec.js",
+    "test": "mocha test/**/*.js",
     "lint": "eslint ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/roopakv/google-photos.git"
   },
-  "keywords": [
-    "google",
-    "google-photos",
-    "photos"
-  ],
+  "keywords": ["google", "google-photos", "photos"],
   "author": "Roopak Venkatakrishnan",
   "license": "MIT",
   "bugs": {
