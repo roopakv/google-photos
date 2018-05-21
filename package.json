@@ -2,7 +2,7 @@
   "name": "googlephotos",
   "version": "0.1.0",
   "description": "Library to make hitting the Google Photos API easy",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "mocha test/**/*.js",
     "lint": "eslint ."
