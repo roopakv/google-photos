@@ -44,8 +44,22 @@ doSomethingWithResponse(response);
 The addEnrichment call either accepts a JSON you construct, or you can use the Enrichment helper
 classes as part of this module to construct an enrichment.
 
-#### textEnrichment
-
+```
+const albumPosition = new photos.AlbumPosition(photos.AlbumPosition.POSITIONS.FIRST_IN_ALBUM);
+const textEnrichment = new photos.TextEnrichment('some text')
+const response = await photos.albums.addEnrichment(albumId, textEnrichment, albumPosition);
 ```
 
+Or with plain JSON
+
+```
+const albumPosition = {
+  position: 'FIRST_IN_ALBUM'
+};
+const textEnrichment = {
+  textEnrichment: {
+    text: 'Some Text'
+  }
+};
+const response = await photos.albums.addEnrichment(albumId, textEnrichment, albumPosition);
 ```
