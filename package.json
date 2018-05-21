@@ -7,6 +7,9 @@
     "test": "mocha test/**/*.js",
     "lint": "eslint ."
   },
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/roopakv/google-photos.git"
