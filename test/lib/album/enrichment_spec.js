@@ -3,7 +3,7 @@
 const {expect} = require('chai');
 
 const constants = require('../../../constants/album');
-const Enrichment = require('../../../lib/album/enrichment');
+const Enrichment = require('../../../lib/albums/enrichment');
 
 class SomeEnrichment extends Enrichment {
   constructor(data, type) {
