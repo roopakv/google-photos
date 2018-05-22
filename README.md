@@ -20,8 +20,11 @@ const photos = new Photos(your_google_auth_token);
 
 ### list
 
+The default page size used is 50 and pageToken is ignored if not passed in.
+
 ```
-const response = await photos.albums.list();
+const response = await photos.albums.list(pageSize, pageToken);
+// const response = await photos.albums.list(pageSize);
 doSomethingWithResponse(response);
 ```
 
@@ -62,4 +65,22 @@ const textEnrichment = {
   }
 };
 const response = await photos.albums.addEnrichment(albumId, textEnrichment, albumPosition);
+```
+
+## Shared Albums
+
+### list
+
+Default pageSize is 50 and pageToken is optional.
+
+```
+const response = await photos.sharedAlbums.list(pageSize, pageToken);
+doSomethingWithResponse(response);
+```
+
+### join
+
+```
+const response = await photos.sharedAlbums.join(shareToken);
+doSomethingWithResponse(response);
 ```
