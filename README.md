@@ -84,3 +84,52 @@ doSomethingWithResponse(response);
 const response = await photos.sharedAlbums.join(shareToken);
 doSomethingWithResponse(response);
 ```
+
+## MediaItems
+
+### get
+
+```
+const response = await photos.mediaItems.get(mediaItemId);
+doSomethingWithResponse(response);
+```
+
+### search
+
+A search can either fetch the contents of an album or search with filters. Either way default page
+size is 50.
+
+#### Searching with an album ID
+
+```
+const response = await photos.mediaItems.search(albumId, optionalPageSize, optionalPageToken);
+doSomethingWithResponse(response);
+```
+
+### Searching with filters.
+
+```
+const filters = new photos.Filters(includeArchivedMedia);
+
+// Adding a date filter.
+const dateFilter = new photos.DateFilter();
+dateFilter.addDate(new Date('2018/05/15'));
+dateFilter.addDate(moment());
+dateFilter.addRange(moment().subtract(10, 'days'), moment().subtract(5, 'days'));
+filters.setDateFilter(dateFilter);
+
+// Adding a content filter.
+const contentFilter = new photos.ContentFilter();
+contentFilter.addIncludedContentCategories(photos.ContentCategory.BIRTHDAYS);
+contentFilter.addExcludedContentCategories(photos.ContentCategory.CITYSCAPES);
+filters.setContentFilter(contentFilter);
+
+// Adding a media type filter filter (all, video or photo)
+const mediaTypeFilter = new photos.MediaTypeFilter(photos.MediaType.ALL_MEDIA);
+filters.setMediaTypeFilter(mediaTypeFilter);
+
+const optionalPageSize = 20;
+
+const response = photos.mediaItems.search(filters, optionalPageSize);
+doSomethingWithResponse(response);
+```
