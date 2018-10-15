@@ -5,8 +5,8 @@ Wrapper around the google photos API. The API reference can be found [here](http
 ## Getting Started
 
 Construct an object with the google auth token. All actions performed on this instance of photos
-will use the auth token the object was constructed with. This lib doesn't yet take care of getting
-the auth token with the required scopes (coming soon).
+will use the auth token the object was constructed with. Read the section below on getting an authtoken
+with the required scopes.
 
 ```
 const Photos = require('googlephotos');
@@ -14,6 +14,60 @@ const Photos = require('googlephotos');
 ...
 
 const photos = new Photos(your_google_auth_token);
+```
+
+### Authentication
+
+This package doesn't authentication itself. We suggest using the official
+[google nodejs library](https://www.npmjs.com/package/googleapis). Here are their [instructions](https://www.npmjs.com/package/googleapis#oauth2-client).
+
+Use the library to get the auth token for the scopes you will need. Read [this](https://developers.google.com/photos/library/guides/authentication-authorization) to figure out what
+scopes you will need.
+
+The scopes are available on the `Photos` object to make your life easier.
+
+| Quick access                                                                                                    | Scope                                                                 | Use                                                                                                    |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `Photos.Scopes.READ_ONLY`                                                                                       | https://www.googleapis.com/auth/photoslibrary.readonly                | Only reading information. Sharing information is returned only if the token has sharing scope as well. |
+| `Photos.Scopes.APPEND_ONLY`                                                                                     | https://www.googleapis.com/auth/photoslibrary.appendonly              | Only add photos, create albums in the user's collection. No sort of read access.                       |
+| `Photos.Scopes.READ_DEV_DATA`                                                                                   | https://www.googleapis.com/auth/photoslibrary.readonly.appcreateddata | Read access to media items and albums created by the developer. Use this with write only.              |
+| `Photos.Scopes.READ_AND_APPEND`                                                                                 | https://www.googleapis.com/auth/photoslibrary                         | Access to read and write only. No sharing information can be accessed.                                 |
+| `Photos.Scopes.SHARING | https://www.googleapis.com/auth/photoslibrary.sharing | Access to sharing information. |
+
+You can figure out your client id, secret and redirect url by going to the
+[Google Cloud Console](https://console.developers.google.com/apis/credentials) and navigating to
+APIs -> Credentials.
+
+```
+const {google} = require('googleapis');
+const Photos = require('googlephotos');
+
+const oauth2Client = new google.auth.OAuth2(
+  YOUR_CLIENT_ID,
+  YOUR_CLIENT_SECRET,
+  YOUR_REDIRECT_URL
+);
+
+const scopes = [
+  Photos.Scopes.READ_ONLY,
+  Photos.Scopes.SHARING,
+];
+
+const url = oauth2Client.generateAuthUrl({
+  // 'online' (default) or 'offline' (gets refresh_token)
+  access_type: 'offline',
+
+  // If you only need one scope you can pass it as a string
+  scope: scopes
+});
+
+// Send the user to the url from above. Once they grant access they will be redirected to the  
+// the redirect URL above with a query param code in the redirect. Use the code below to get the
+// access token.
+
+const {tokens} = await oauth2Client.getToken(code)
+
+// The token from above can be used to initialize the photos library.
 ```
 
 ## Albums
