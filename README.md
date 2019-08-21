@@ -1,4 +1,4 @@
-# google-photos
+# googlephotos
 
 Wrapper around the google photos API. The API reference can be found [here](https://developers.google.com/photos/library/reference/).
 
