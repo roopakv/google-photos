@@ -148,6 +148,14 @@ const response = await photos.mediaItems.get(mediaItemId);
 doSomethingWithResponse(response);
 ```
 
+### upload
+
+```
+const response = await photos.mediaItems.upload(albumId, fileName, filePath, description);
+doSomethingWithResponse(response);
+
+```
+
 ### search
 
 A search can either fetch the contents of an album or search with filters. Either way default page
