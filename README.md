@@ -156,6 +156,15 @@ doSomethingWithResponse(response);
 
 ```
 
+### uploadMultiple
+Supports uploading an array of files/images at once from a single directory.
+
+```
+const response = await photos.mediaItems.upload(albumId, files, directoryPath, description);
+doSomethingWithResponse(response);
+
+```
+
 ### search
 
 A search can either fetch the contents of an album or search with filters. Either way default page
