@@ -156,6 +156,20 @@ doSomethingWithResponse(response);
 
 ```
 
+### uploadMultiple
+Supports uploading an array of file objects at once from a single directory, file descriptions are optional. 
+Limited to 50 files, use multiple sequential calls to avoid this limitation. 
+
+```
+const files = [
+  { name: 'myself.jpg', description: 'any description you want' },
+  { name: 'someone-else.png' }
+]
+const response = await photos.mediaItems.upload(albumId, files, directoryPath);
+doSomethingWithResponse(response);
+
+```
+
 ### search
 
 A search can either fetch the contents of an album or search with filters. Either way default page
