@@ -1,6 +1,6 @@
 {
   "name": "googlephotos",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Library to make working with the Google Photos API easy",
   "main": "lib/index.js",
   "scripts": {
