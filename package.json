@@ -37,7 +37,7 @@
     "prettier": "^1.12.1"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash.chunk": "^4.2.0",
     "request": "^2.86.0",
     "request-promise": "^4.2.2"
   }
