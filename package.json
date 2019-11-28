@@ -14,7 +14,11 @@
     "type": "git",
     "url": "git+https://github.com/roopakv/google-photos.git"
   },
-  "keywords": ["google", "google-photos", "photos"],
+  "keywords": [
+    "google",
+    "google-photos",
+    "photos"
+  ],
   "author": "Roopak Venkatakrishnan",
   "license": "MIT",
   "bugs": {
@@ -33,6 +37,7 @@
     "prettier": "^1.12.1"
   },
   "dependencies": {
+    "lodash.chunk": "^4.2.0",
     "request": "^2.86.0",
     "request-promise": "^4.2.2"
   }

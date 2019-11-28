@@ -61,7 +61,7 @@ const url = oauth2Client.generateAuthUrl({
   scope: scopes
 });
 
-// Send the user to the url from above. Once they grant access they will be redirected to the  
+// Send the user to the url from above. Once they grant access they will be redirected to the
 // the redirect URL above with a query param code in the redirect. Use the code below to get the
 // access token.
 
@@ -157,15 +157,16 @@ doSomethingWithResponse(response);
 ```
 
 ### uploadMultiple
-Supports uploading an array of file objects at once from a single directory, file descriptions are optional. 
-Limited to 50 files, use multiple sequential calls to avoid this limitation. 
+Supports uploading an array of file objects at once from a single directory, file descriptions are optional.
+Supports an optional requestDelay, which pauses execution for the specified time (milliseconds) after 50 requests to google photos `upload` api.
+This is to prevent the api from rejecting requests for making too many requests per minute.
 
 ```
 const files = [
   { name: 'myself.jpg', description: 'any description you want' },
   { name: 'someone-else.png' }
 ]
-const response = await photos.mediaItems.upload(albumId, files, directoryPath);
+const response = await photos.mediaItems.upload(albumId, files, directoryPath, requestDelay = 10000);
 doSomethingWithResponse(response);
 
 ```
