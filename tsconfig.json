@@ -1,0 +1,6 @@
+{
+	"extends": "@richienb/tsconfig",
+	"compilerOptions": {
+		"outDir": "dist/"
+	}
+}
