@@ -2,7 +2,10 @@
   "name": "googlephotos",
   "version": "0.3.0",
   "description": "Library to make working with the Google Photos API easy",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "mocha test/**/*.js",
     "lint": "eslint ."
@@ -25,7 +28,18 @@
     "url": "https://github.com/roopakv/google-photos/issues"
   },
   "homepage": "https://github.com/roopakv/google-photos#readme",
+  "dependencies": {
+    "delay": "^4.3.0",
+    "ky": "^0.20.0",
+    "ky-universal": "^0.6.0",
+    "lodash.chunk": "^4.2.0",
+    "moment": "^2.27.0",
+    "p-map": "^4.0.0"
+  },
   "devDependencies": {
+    "@richienb/tsconfig": "^0.1.1",
+    "@types/lodash.chunk": "^4.2.6",
+    "@types/node": "^14.0.14",
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -34,11 +48,24 @@
     "eslint-plugin-mocha": "^5.0.0",
     "eslint-plugin-prettier": "^2.6.0",
     "mocha": "^5.2.0",
-    "prettier": "^2.0.5"
+    "typescript": "^3.9.5",
+    "xo": "^0.32.0"
   },
-  "dependencies": {
-    "ky": "^0.20.0",
-    "ky-universal": "^0.6.0",
-    "lodash.chunk": "^4.2.0"
+  "xo": {
+    "extends": ["airbnb-base", "plugin:prettier/recommended"],
+    "plugins": ["prettier", "mocha"],
+    "env": ["es6", "mocha", "node"],
+    "rules": {
+    "prettier/prettier": "error",
+    "strict": 0,
+    "mocha/no-exclusive-tests": "error",
+    "mocha/no-mocha-arrows": "error",
+    "mocha/no-nested-tests": "error",
+    "mocha/no-return-and-callback": "error",
+    "mocha/no-skipped-tests": "error",
+    "prefer-arrow-callback": 0,
+    "func-names": 0,
+    "no-underscore-dangle": 0
   }
+}
 }
