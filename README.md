@@ -8,10 +8,8 @@ Construct an object with the google auth token. All actions performed on this in
 will use the auth token the object was constructed with. Read the section below on getting an authtoken
 with the required scopes.
 
-```
+```js
 const Photos = require('googlephotos');
-
-...
 
 const photos = new Photos(your_google_auth_token);
 ```
@@ -38,34 +36,27 @@ You can figure out your client id, secret and redirect url by going to the
 [Google Cloud Console](https://console.developers.google.com/apis/credentials) and navigating to
 APIs -> Credentials.
 
-```
+```js
 const {google} = require('googleapis');
 const Photos = require('googlephotos');
 
-const oauth2Client = new google.auth.OAuth2(
-  YOUR_CLIENT_ID,
-  YOUR_CLIENT_SECRET,
-  YOUR_REDIRECT_URL
-);
+const oauth2Client = new google.auth.OAuth2(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REDIRECT_URL);
 
-const scopes = [
-  Photos.Scopes.READ_ONLY,
-  Photos.Scopes.SHARING,
-];
+const scopes = [Photos.Scopes.READ_ONLY, Photos.Scopes.SHARING];
 
 const url = oauth2Client.generateAuthUrl({
   // 'online' (default) or 'offline' (gets refresh_token)
   access_type: 'offline',
 
   // If you only need one scope you can pass it as a string
-  scope: scopes
+  scope: scopes,
 });
 
 // Send the user to the url from above. Once they grant access they will be redirected to the
 // the redirect URL above with a query param code in the redirect. Use the code below to get the
 // access token.
 
-const {tokens} = await oauth2Client.getToken(code)
+const {tokens} = await oauth2Client.getToken(code);
 
 // The token from above can be used to initialize the photos library.
 ```
@@ -76,24 +67,24 @@ const {tokens} = await oauth2Client.getToken(code)
 
 The default page size used is 50 and pageToken is ignored if not passed in.
 
-```
+```js
 const response = await photos.albums.list(pageSize, pageToken);
 // const response = await photos.albums.list(pageSize);
-doSomethingWithResponse(response);
+// doSomethingWithResponse(response);
 ```
 
 ### get
 
-```
+```js
 const response = await photos.albums.get(albumId);
-doSomethingWithResponse(response);
+// doSomethingWithResponse(response);
 ```
 
 ### create
 
-```
+```js
 const response = await photos.albums.create('Your Album Title');
-doSomethingWithResponse(response);
+// doSomethingWithResponse(response);
 ```
 
 ### addEnrichment
@@ -101,22 +92,22 @@ doSomethingWithResponse(response);
 The addEnrichment call either accepts a JSON you construct, or you can use the Enrichment helper
 classes as part of this module to construct an enrichment.
 
-```
+```js
 const albumPosition = new photos.AlbumPosition(photos.AlbumPosition.POSITIONS.FIRST_IN_ALBUM);
-const textEnrichment = new photos.TextEnrichment('some text')
+const textEnrichment = new photos.TextEnrichment('some text');
 const response = await photos.albums.addEnrichment(albumId, textEnrichment, albumPosition);
 ```
 
 Or with plain JSON
 
-```
+```js
 const albumPosition = {
-  position: 'FIRST_IN_ALBUM'
+  position: 'FIRST_IN_ALBUM',
 };
 const textEnrichment = {
   textEnrichment: {
-    text: 'Some Text'
-  }
+    text: 'Some Text',
+  },
 };
 const response = await photos.albums.addEnrichment(albumId, textEnrichment, albumPosition);
 ```
@@ -127,48 +118,50 @@ const response = await photos.albums.addEnrichment(albumId, textEnrichment, albu
 
 Default pageSize is 50 and pageToken is optional.
 
-```
+```js
 const response = await photos.sharedAlbums.list(pageSize, pageToken);
-doSomethingWithResponse(response);
+// doSomethingWithResponse(response);
 ```
 
 ### join
 
-```
+```js
 const response = await photos.sharedAlbums.join(shareToken);
-doSomethingWithResponse(response);
+// doSomethingWithResponse(response);
 ```
 
 ## MediaItems
 
 ### get
 
-```
+```js
 const response = await photos.mediaItems.get(mediaItemId);
-doSomethingWithResponse(response);
+// doSomethingWithResponse(response);
 ```
 
 ### upload
 
-```
+```js
 const response = await photos.mediaItems.upload(albumId, fileName, filePath, description);
-doSomethingWithResponse(response);
-
+// doSomethingWithResponse(response);
 ```
 
 ### uploadMultiple
+
 Supports uploading an array of file objects at once from a single directory, file descriptions are optional.
 Supports an optional requestDelay, which pauses execution for the specified time (milliseconds) after 50 requests to google photos `upload` api.
 This is to prevent the api from rejecting requests for making too many requests per minute.
 
-```
+```js
 const files = [
-  { name: 'myself.jpg', description: 'any description you want' },
-  { name: 'someone-else.png' }
-]
-const response = await photos.mediaItems.upload(albumId, files, directoryPath, requestDelay = 10000);
-doSomethingWithResponse(response);
+  {name: 'myself.jpg', description: 'any description you want'},
+  {name: 'someone-else.png'},
+];
 
+const requestDelay = 1000;
+
+const response = await photos.mediaItems.upload(albumId, files, directoryPath, requestDelay);
+// doSomethingWithResponse(response);
 ```
 
 ### search
@@ -178,14 +171,14 @@ size is 50.
 
 #### Searching with an album ID
 
-```
+```js
 const response = await photos.mediaItems.search(albumId, optionalPageSize, optionalPageToken);
-doSomethingWithResponse(response);
+// doSomethingWithResponse(response);
 ```
 
 ### Searching with filters.
 
-```
+```js
 const filters = new photos.Filters(includeArchivedMedia);
 
 // Adding a date filter.
@@ -208,5 +201,5 @@ filters.setMediaTypeFilter(mediaTypeFilter);
 const optionalPageSize = 20;
 
 const response = photos.mediaItems.search(filters, optionalPageSize);
-doSomethingWithResponse(response);
+// doSomethingWithResponse(response);
 ```
