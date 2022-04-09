@@ -37,8 +37,8 @@
     "prettier": "^2.0.5"
   },
   "dependencies": {
-    "ky": "^0.20.0",
-    "ky-universal": "^0.6.0",
+    "ky": "^0.25.1",
+    "ky-universal": "^0.8.2",
     "lodash.chunk": "^4.2.0"
   }
 }
