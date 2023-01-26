@@ -160,7 +160,7 @@ const files = [
 
 const requestDelay = 1000;
 
-const response = await photos.mediaItems.upload(albumId, files, directoryPath, requestDelay);
+const response = await photos.mediaItems.uploadMultiple(albumId, files, directoryPath, requestDelay);
 // doSomethingWithResponse(response);
 ```
 
